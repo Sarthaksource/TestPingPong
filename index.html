@@ -57,13 +57,11 @@
 		canvas.height = window.innerHeight;
 
 		let touchY;
-		let prevTouchY;
 		
 		let touchOccurred = false;
 
 		function touchPosition(event)
 		{
-			prevTouchY = touchY || event.touches[0].clientY;
 			touchY = event.touches[0].clientY;
 			touchOccurred = true;
 		}
@@ -150,9 +148,7 @@
 			this.update = function()
 			{
 				if(touchOccurred) {
-					let deltaY = touchY - prevTouchY;
-					this.pos.y += deltaY;
-					prevTouchY = touchY;
+					this.pos.y = touchY - (this.height / 2);
 				}
 			}
 
@@ -243,8 +239,8 @@
 		let paddleHeight = 160;
 		
 		const ball = new Ball(vec2(200, 200), vec2(10, 10), 20);
-		const paddle1 = new Paddle(vec2(0, (canvas.height - paddleHeight) / 2), vec2(0, 0), 20, paddleHeight);
-		const paddle2 = new Paddle(vec2(canvas.width-20, (canvas.height - paddleHeight) / 2), vec2(15, 15), 20, paddleHeight);
+		const paddle1 = new Paddle(vec2(0, 50), vec2(15, 15), 20, paddleHeight);
+		const paddle2 = new Paddle(vec2(canvas.width-20, 50), vec2(15, 15), 20, paddleHeight);
 
 
 		function gameUpdate()
